@@ -1,0 +1,18 @@
+package com.wordpress.felipenipo;
+
+import android.app.Application;
+
+public class GoogleVolleyApplication extends Application {
+
+	// Prevent instantiation
+	private GoogleVolleyApplication() {
+		super();
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+	}
+	
+}

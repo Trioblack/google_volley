@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.android.volley.RequestQueue"/>
+<fullyQualifiedTypeName name="com.android.volley.toolbox.Volley"/>
+<fullyQualifiedTypeName name="android.app.Application"/>
+<fullyQualifiedTypeName name="com.android.volley.Request"/>
+<fullyQualifiedTypeName name="com.android.volley.Request.Method"/>
+<fullyQualifiedTypeName name="com.android.volley.RequestQueue.RequestFilter"/>
+<fullyQualifiedTypeName name="com.android.volley.Response"/>
+<fullyQualifiedTypeName name="com.android.volley.Response.Listener"/>
+<fullyQualifiedTypeName name="com.android.volley.Response.ErrorListener"/>
+<fullyQualifiedTypeName name="com.android.volley.toolbox.JsonArrayRequest"/>
+<fullyQualifiedTypeName name="com.android.volley.toolbox.JsonObjectRequest"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.wordpress.felipenipo.NetworkRequestCallback"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="com.wordpress.felipenipo.JSONParser"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.json.JSONArray"/>
+<fullyQualifiedTypeName name="com.wordpress.felipenipo.entities.Customer"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.wordpress.felipenipo.NetworkQueue"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="com.wordpress.felipenipo.R.id"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+</qualifiedTypeNameHistroy>

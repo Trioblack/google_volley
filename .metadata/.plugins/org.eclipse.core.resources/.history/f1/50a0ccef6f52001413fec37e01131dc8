@@ -1,0 +1,5 @@
+package com.wordpress.felipenipo;
+
+public interface NetworkRequestCallback {
+
+}
