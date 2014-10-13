@@ -1,0 +1,11 @@
+package com.wordpress.felipenipo;
+
+import org.json.JSONObject;
+
+public interface NetworkRequestCallback {
+
+	public void onRequestResponse(JSONObject jsonObject);
+	public void onRequestError(Exception error);
+	
+}
+

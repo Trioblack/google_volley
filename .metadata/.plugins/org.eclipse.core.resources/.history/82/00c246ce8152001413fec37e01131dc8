@@ -1,0 +1,77 @@
+package com.wordpress.felipenipo;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.wordpress.felipenipo.entities.Customer;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+
+public class MainActivity extends Activity {
+
+	private NetworkQueue mNetworkQueue;
+	
+	public static final String TAG = "MainActivity";
+	private static String SERVER_URL = "http://protobackend.herokuapp.com";
+	private static String CREATE_CUSTOMER_PATH = "/customers";
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        String test = "	{\"customer\":" +
+        			  "	{\"name\":\"John Doe\"," +
+        			  "	\"email\":\"john.doe@example.com\"," +
+        			  "	\"password\":\"980293jfn98hinf298h3\"," +
+        			  "	\"device_model\":\"StarTAC\"," +
+        			  " \"gcm_id\":\"09jcm892j3p89hc2983h9982\"}}";
+        
+        JSONObject jsonObject = new JSONObject(test);
+        
+        mNetworkQueue = NetworkQueue.getInstance();
+        mNetworkQueue.init(getApplication());
+        mNetworkQueue.doPost(
+        	SERVER_URL + CREATE_CUSTOMER_PATH,
+        	new JSONObject(test) /*JSONParser.toJSON(null)*/,
+        	TAG,
+        	new NetworkRequestCallback() {
+        		@Override
+				public void onRequestResponse(JSONObject jsonObject) {
+					
+				}
+        		@Override
+				public void onArrayRequestResponse(JSONArray jsonArray) {
+					
+				}
+				@Override
+				public void onRequestError(Exception error) {
+					
+				}
+			});
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

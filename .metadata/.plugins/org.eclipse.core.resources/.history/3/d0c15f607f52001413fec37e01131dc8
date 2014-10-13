@@ -1,0 +1,24 @@
+package com.wordpress.felipenipo;
+
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
+public class JSONParser {
+
+	private static Gson mGson;
+	
+	// Static constructor
+	static {
+		mGson = new Gson();
+	}
+	
+	public static String toJSONString(Object obj) {
+		return mGson.toJson(obj);
+	}
+	
+	public static <T> T toObject(JSONObject jsonObject, Class<T> classOfT) {
+		return mGson.fromJson(jsonObject.toString(), classOfT);
+	}
+	
+}

@@ -1,0 +1,25 @@
+package com.wordpress.felipenipo;
+
+import com.android.volley.RequestQueue;
+
+public class NetworkQueue {
+
+	private static NetworkQueue mInstance;
+	private RequestQueue mRequestQueue;
+	
+	// Avoid instance
+	private NetworkQueue() {
+		
+	}
+	
+	public static NetworkQueue getInstance() {
+		if(mInstance != null) {
+			mInstance = new NetworkQueue();
+		}
+		return mInstance;
+	}
+	
+	public void init() {
+		
+	}
+}

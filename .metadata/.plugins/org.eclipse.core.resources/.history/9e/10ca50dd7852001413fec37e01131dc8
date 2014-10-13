@@ -1,0 +1,108 @@
+package com.wordpress.felipenipo;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Application;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+public class NetworkQueue {
+
+	private static NetworkQueue mInstance;
+	private RequestQueue mRequestQueue;
+	
+	// Prevent instantiation
+	private NetworkQueue() {
+		
+	}
+	
+	public static NetworkQueue getInstance() {
+		if(mInstance != null) {
+			mInstance = new NetworkQueue();
+		}
+		return mInstance;
+	}
+	
+	public void init(Application application) {
+		mRequestQueue = Volley.newRequestQueue(application.getApplicationContext());
+	}
+	
+	public void cancelRequestsByTag(Object tag) {
+		mRequestQueue.cancelAll(tag);
+	}
+	
+	public void cancelAllRequests() {
+		mRequestQueue.cancelAll(new RequestQueue.RequestFilter() {
+			@Override
+			public boolean apply(Request<?> request) {
+				return true;
+			}
+		});
+	}
+	
+	public void doGet(String url, Object requestTag,
+		NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.GET, url, requestTag, networkRequestCallback);
+	}
+	
+	public void doPost(String url, JSONObject jsonObject, Object requestTag,
+		NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.POST, url, jsonObject, requestTag, networkRequestCallback);
+	}
+
+	public void doPut(String url, JSONObject jsonObject, Object requestTag,
+		NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.PUT, url, jsonObject, requestTag, networkRequestCallback);
+	}
+
+	public void doDelete(String url, Object requestTag,
+		NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.DELETE, url, requestTag, networkRequestCallback);
+	}
+	
+	private void buildJSONRequest(int method, String url, JSONObject jsonObject, Object requestTag,
+		final NetworkRequestCallback networkRequestCallback) {
+		JsonObjectRequest request = new JsonObjectRequest(method, url, jsonObject,
+			new Response.Listener<JSONObject>() {
+				@Override
+				public void onResponse(JSONObject response) {
+					networkRequestCallback.onRequestResponse(response);
+				}
+			},
+			new Response.ErrorListener() {
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					networkRequestCallback.onRequestError(error);
+				}
+			});
+	}
+	
+	private void buildJSONArrayRequest(String url, JSONObject jsonObject, Object requestTag,
+		final NetworkRequestCallback networkRequestCallback) {
+		// The method is supposed to be GET
+		JsonArrayRequest request = new JsonArrayRequest(url, 
+			new Response.Listener<JSONArray>() {
+				@Override
+				public void onResponse(JSONArray response) {
+					networkRequestCallback.onRequestResponse(response);
+				}
+			},
+			new Response.ErrorListener() {
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					networkRequestCallback.onRequestError(error);
+				}
+			});
+	}
+	
+	private void doRequest(Request request) {
+		mRequestQueue.add(request);
+	}
+}

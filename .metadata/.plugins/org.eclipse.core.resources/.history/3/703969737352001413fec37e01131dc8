@@ -1,0 +1,59 @@
+package com.wordpress.felipenipo;
+
+import org.json.JSONObject;
+
+import android.app.Application;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+public class NetworkQueue {
+
+	private static NetworkQueue mInstance;
+	private RequestQueue mRequestQueue;
+	
+	// Avoid instance
+	private NetworkQueue() {
+		
+	}
+	
+	public static NetworkQueue getInstance() {
+		if(mInstance != null) {
+			mInstance = new NetworkQueue();
+		}
+		return mInstance;
+	}
+	
+	public void init(Application application) {
+		mRequestQueue = Volley.newRequestQueue(application.getApplicationContext());
+	}
+	
+	public void cancelRequestsByTag(Object tag) {
+		mRequestQueue.cancelAll(tag);
+	}
+	
+	public void doGet(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.GET, url, requestTag, networkRequestCallback);
+	}
+	
+	public void doPost(String url, JSONObject jsonObject, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.POST, url, jsonObject, requestTag, networkRequestCallback);
+	}
+
+	public void doPut(String url, JSONObject jsonObject, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.PUT, url, jsonObject, requestTag, networkRequestCallback);
+	}
+
+	public void doDelete(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		doRequest(Request.Method.DELETE, url, requestTag, networkRequestCallback);
+	}
+	
+	private void doRequest(int method, String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		doRequest(method, url, null, requestTag, networkRequestCallback);
+	}
+	
+	private void doRequest(int method, String url, JSONObject jsonObject, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		mRequestQueue.add(request)
+	}
+}

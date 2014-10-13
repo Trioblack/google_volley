@@ -1,0 +1,13 @@
+package com.wordpress.felipenipo;
+
+import com.google.gson.Gson;
+
+public class JSONParser {
+
+	private static Gson mGson;
+	
+	static {
+		Gson m
+	}
+	
+}

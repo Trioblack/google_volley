@@ -1,0 +1,22 @@
+package com.wordpress.felipenipo;
+
+public class NetworkQueue {
+
+	private static NetworkQueue mInstance;
+	
+	// Avoid instance
+	private NetworkQueue() {
+		
+	}
+	
+	public static NetworkQueue getInstance() {
+		if(mInstance != null) {
+			mInstance = new NetworkQueue();
+		}
+		return mInstance;
+	}
+	
+	public void init() {
+		
+	}
+}

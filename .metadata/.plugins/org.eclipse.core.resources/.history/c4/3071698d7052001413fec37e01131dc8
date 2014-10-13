@@ -1,0 +1,47 @@
+package com.wordpress.felipenipo;
+
+import android.app.Application;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+public class NetworkQueue {
+
+	private static NetworkQueue mInstance;
+	private RequestQueue mRequestQueue;
+	
+	// Avoid instance
+	private NetworkQueue() {
+		
+	}
+	
+	public static NetworkQueue getInstance() {
+		if(mInstance != null) {
+			mInstance = new NetworkQueue();
+		}
+		return mInstance;
+	}
+	
+	public void init(Application application) {
+		mRequestQueue = Volley.newRequestQueue(application.getApplicationContext());
+	}
+	
+	public void doGet(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		
+	}
+	
+	public void doPost(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+		
+	}
+
+	public void doPut(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+	
+	}
+
+	public void doDelete(String url, String requestTag, NetworkRequestCallback networkRequestCallback) {
+	
+	}
+	
+	private void doRequest(Request.Method method, String url, String requestTag, NetworkRequestCallback networkRequestCallback)
+}
