@@ -1,9 +1,0 @@
-package com.wordpress.felipenipo;
-
-public interface NetworkRequestCallback {
-
-	public void onRequestResponse();
-	public void onRequestError();
-	
-}
-
