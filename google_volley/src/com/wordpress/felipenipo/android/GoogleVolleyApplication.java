@@ -1,4 +1,6 @@
-package com.wordpress.felipenipo;
+package com.wordpress.felipenipo.android;
+
+import com.wordpress.felipenipo.network.NetworkQueue;
 
 import android.app.Application;
 

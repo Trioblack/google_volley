@@ -1,10 +1,11 @@
-package com.wordpress.felipenipo;
+package com.wordpress.felipenipo.android.activities;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.wordpress.felipenipo.entities.Customer;
+import com.wordpress.felipenipo.R;
+import com.wordpress.felipenipo.network.NetworkQueue;
+import com.wordpress.felipenipo.network.NetworkRequestCallback;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,17 +22,6 @@ public class MainActivity extends Activity {
 	
 	// Constants
 	public static final String TAG = "MainActivity";
-	private static final String SERVER_URL = "http://protobackend.herokuapp.com";
-	private static final String CREATE_CUSTOMER_PATH = "/customers";
-	private static final String GET_ALL_CUSTOMERS_PATH = "/customers";
-	private static final String GET_CUSTOMER_PATH = "/customers/";
-	private static final String FAKE_JSON = 
-			  "	{\"customer\":" +
-			  "	{\"name\":\"John Doe\"," +
-			  "	\"email\":\"john.doe@example.com\"," +
-			  "	\"password\":\"980293jfn98hinf298h3\"," +
-			  "	\"device_model\":\"StarTAC\"," +
-			  " \"gcm_id\":\"09jcm892j3p89hc2983h9982\"}}";
 	
 	// Members
 	private NetworkQueue mNetworkQueue;
@@ -47,32 +37,19 @@ public class MainActivity extends Activity {
         
         mNetworkQueue = NetworkQueue.getInstance();
         
-        Customer customer = null;
-        JSONObject tryJsonObject = null;
-        try {
-        	tryJsonObject = new JSONObject(FAKE_JSON);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-        final JSONObject jsonObject = tryJsonObject;
-        
         mIdEditText = (EditText) findViewById(R.id.id_et);
         
         mGetAllButton = (Button) findViewById(R.id.get_all_btn);
         mGetAllButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mNetworkQueue.doArrayRequest(
-		        	SERVER_URL + GET_ALL_CUSTOMERS_PATH,
+				mNetworkQueue.doGetArray(
+		        	"",
 		        	TAG,
-		        	new NetworkRequestCallback() {
+		        	new NetworkRequestCallback<JSONArray>() {
 		        		@Override
-						public void onRequestResponse(JSONObject jsonObject) {
+						public void onRequestResponse(JSONArray jsonObject) {
 							Log.d(TAG, "GET ALL onRequestResponse!" + "\n" + jsonObject.toString());
-						}
-		        		@Override
-						public void onArrayRequestResponse(JSONArray jsonArray) {
-		        			Log.d(TAG, "GET ALL onArrayRequestResponse!" + "\n" + jsonArray.toString());
 						}
 						@Override
 						public void onRequestError(Exception error) {
@@ -87,17 +64,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				mNetworkQueue.doPost(
-		        	SERVER_URL + CREATE_CUSTOMER_PATH,
-		        	jsonObject /*JSONParser.toJSON(customer)*/,
+		        	"",
+		        	null,
 		        	TAG,
-		        	new NetworkRequestCallback() {
+		        	new NetworkRequestCallback<JSONObject>() {
 		        		@Override
 						public void onRequestResponse(JSONObject jsonObject) {
 							Log.d(TAG, "POST onRequestResponse!" + "\n" + jsonObject.toString());
-						}
-		        		@Override
-						public void onArrayRequestResponse(JSONArray jsonArray) {
-		        			Log.d(TAG, "POST onArrayRequestResponse!" + "\n" + jsonArray.toString());
 						}
 						@Override
 						public void onRequestError(Exception error) {
@@ -112,16 +85,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				mNetworkQueue.doGet(
-		        	SERVER_URL + GET_CUSTOMER_PATH + mIdEditText.getText().toString(),
+		        	"" + mIdEditText.getText().toString(),
 		        	TAG,
-		        	new NetworkRequestCallback() {
+		        	new NetworkRequestCallback<JSONObject>() {
 		        		@Override
 						public void onRequestResponse(JSONObject jsonObject) {
 							Log.d(TAG, "GET onRequestResponse!" + "\n" + jsonObject.toString());
-						}
-		        		@Override
-						public void onArrayRequestResponse(JSONArray jsonArray) {
-		        			Log.d(TAG, "GET onArrayRequestResponse!" + "\n" + jsonArray.toString());
 						}
 						@Override
 						public void onRequestError(Exception error) {
